@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </developer>
- <date>2016-02-02</date>
+ <date>2017-10-17</date>
  <version>
   <release>2.0.6</release>
   <api>1.0.0</api>
@@ -43,7 +43,6 @@
       <dir name="examples">
        <file name="json.php" role="doc" />
       </dir> <!-- /doc/Horde/Serialize/examples -->
-      <file name="COPYING" role="doc" />
      </dir> <!-- /doc/Horde/Serialize -->
     </dir> <!-- /doc/Horde -->
    </dir> <!-- /doc -->
@@ -68,6 +67,7 @@
      </dir> <!-- /test/Horde/Serialize -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
+   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -139,15 +139,15 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="COPYING" name="doc/Horde/Serialize/COPYING" />
-   <install as="Horde/Serialize/examples/json.php" name="doc/Horde/Serialize/examples/json.php" />
+   <install as="examples/json.php" name="doc/Horde/Serialize/examples/json.php" />
    <install as="Horde/Serialize.php" name="lib/Horde/Serialize.php" />
    <install as="Horde/Serialize/Exception.php" name="lib/Horde/Serialize/Exception.php" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="Horde/Serialize/AllTests.php" name="test/Horde/Serialize/AllTests.php" />
    <install as="Horde/Serialize/bootstrap.php" name="test/Horde/Serialize/bootstrap.php" />
+   <install as="Horde/Serialize/fixtures/badutf8.txt" name="test/Horde/Serialize/fixtures/badutf8.txt" />
    <install as="Horde/Serialize/JsonTest.php" name="test/Horde/Serialize/JsonTest.php" />
    <install as="Horde/Serialize/phpunit.xml" name="test/Horde/Serialize/phpunit.xml" />
-   <install as="Horde/Serialize/fixtures/badutf8.txt" name="test/Horde/Serialize/fixtures/badutf8.txt" />
   </filelist>
  </phprelease>
  <changelog>
@@ -398,7 +398,7 @@ Converted to package.xml 2.0 for pear.horde.org
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2016-02-02</date>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
