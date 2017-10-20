@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </developer>
- <date>2017-10-17</date>
+ <date>2017-10-20</date>
  <version>
   <release>2.0.6</release>
   <api>1.0.0</api>
@@ -63,7 +63,6 @@
       <file name="AllTests.php" role="test" />
       <file name="bootstrap.php" role="test" />
       <file name="JsonTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/Serialize -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -147,7 +146,6 @@
    <install as="Horde/Serialize/bootstrap.php" name="test/Horde/Serialize/bootstrap.php" />
    <install as="Horde/Serialize/fixtures/badutf8.txt" name="test/Horde/Serialize/fixtures/badutf8.txt" />
    <install as="Horde/Serialize/JsonTest.php" name="test/Horde/Serialize/JsonTest.php" />
-   <install as="Horde/Serialize/phpunit.xml" name="test/Horde/Serialize/phpunit.xml" />
   </filelist>
  </phprelease>
  <changelog>
@@ -398,7 +396,7 @@ Converted to package.xml 2.0 for pear.horde.org
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-17</date>
+   <date>2017-10-20</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
