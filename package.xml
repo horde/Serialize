@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </developer>
- <date>2017-10-20</date>
+ <date>2017-10-27</date>
  <version>
   <release>2.0.6</release>
   <api>1.0.0</api>
@@ -42,6 +42,7 @@
       <dir name="examples">
        <file name="json.php" role="doc" />
       </dir> <!-- /doc/Horde/Serialize/examples -->
+      <file name="CHANGES" role="doc" />
      </dir> <!-- /doc/Horde/Serialize -->
     </dir> <!-- /doc/Horde -->
    </dir> <!-- /doc -->
@@ -137,6 +138,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Serialize/CHANGES" />
    <install as="examples/json.php" name="doc/Horde/Serialize/examples/json.php" />
    <install as="Horde/Serialize.php" name="lib/Horde/Serialize.php" />
    <install as="Horde/Serialize/Exception.php" name="lib/Horde/Serialize/Exception.php" />
@@ -395,7 +397,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-20</date>
+   <date>2017-10-27</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
    </notes>
