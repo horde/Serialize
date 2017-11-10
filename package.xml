@@ -22,7 +22,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </developer>
- <date>2017-10-30</date>
+ <date>2017-11-10</date>
  <version>
   <release>2.0.6</release>
   <api>1.0.0</api>
@@ -61,6 +61,7 @@
      <dir name="Serialize">
       <dir name="fixtures">
        <file name="badutf8.txt" role="test" />
+       <file name="badutf8_2.txt" role="test" />
       </dir> <!-- /test/Horde/Serialize/fixtures -->
       <file name="AllTests.php" role="test" />
       <file name="bootstrap.php" role="test" />
@@ -147,9 +148,10 @@
    <install as="Horde/Serialize/Exception.php" name="lib/Horde/Serialize/Exception.php" />
    <install as="Horde/Serialize/AllTests.php" name="test/Horde/Serialize/AllTests.php" />
    <install as="Horde/Serialize/bootstrap.php" name="test/Horde/Serialize/bootstrap.php" />
+   <install as="Horde/Serialize/fixtures/badutf8.txt" name="test/Horde/Serialize/fixtures/badutf8.txt" />
+   <install as="Horde/Serialize/fixtures/badutf8_2.txt" name="test/Horde/Serialize/fixtures/badutf8_2.txt" />
    <install as="Horde/Serialize/JsonTest.php" name="test/Horde/Serialize/JsonTest.php" />
    <install as="Horde/Serialize/phpunit.xml" name="test/Horde/Serialize/phpunit.xml" />
-   <install as="Horde/Serialize/fixtures/badutf8.txt" name="test/Horde/Serialize/fixtures/badutf8.txt" />
   </filelist>
  </phprelease>
  <changelog>
@@ -400,7 +402,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-30</date>
+   <date>2017-11-10</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 

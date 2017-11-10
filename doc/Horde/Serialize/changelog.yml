@@ -8,7 +8,9 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes:
+  notes: |+
+    [jan] Improve JSON serialization of invalid UTF-8 data.
+    
 2.0.5:
   api: 1.0.0
   state:

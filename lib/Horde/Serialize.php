@@ -244,6 +244,9 @@ class Horde_Serialize
             /* Basic error handling attempts.
              * TODO: JSON_ERROR_UTF8 = 5; available as of PHP 5.3.3 */
             if (json_last_error() === 5) {
+                if (!$params) {
+                    $params = 'UTF-8';
+                }
                 $data = json_encode(Horde_String::convertCharset($data, $params, 'UTF-8', true));
             } else {
                 $data = $tmp;

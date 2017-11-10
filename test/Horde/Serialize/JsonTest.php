@@ -104,6 +104,13 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
             Horde_Serialize::serialize(file_get_contents(__DIR__ . '/fixtures/badutf8.txt'), Horde_Serialize::JSON, 'iso-8859-1')
         );
         error_reporting($old_error_reporting);
+        $this->assertEquals(
+            '"This is b\u00e4d \u0080UTF-8.\n"',
+            Horde_Serialize::serialize(
+                file_get_contents(__DIR__ . '/fixtures/badutf8_2.txt'),
+                Horde_Serialize::JSON
+            )
+        );
     }
 
     // JSON encode/decode tests.
