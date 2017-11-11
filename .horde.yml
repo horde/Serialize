@@ -39,7 +39,9 @@ dependencies:
       pear.horde.org/Horde_Imap_Client: ^2
       pear.horde.org/Horde_Mime: ^2
       pear.horde.org/Horde_Test: ^2.1
-      pecl.php.net/lzf: ^1.5.2
+      pecl.php.net/lzf:
+        version: ^1.5.2
+        providesextension: lzf
     ext:
       bz2: '*'
       json: '*'
