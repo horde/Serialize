@@ -2,7 +2,7 @@
 <package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Horde_Serialize</name>
  <channel>pear.horde.org</channel>
- <summary>Data Encapulation API</summary>
+ <summary>Data serialization library</summary>
  <description>An interface to various methods of encapsulating data.</description>
  <lead>
   <name>Chuck Hagenbuch</name>
@@ -20,9 +20,9 @@
   <name>Michael Slusarz</name>
   <user>slusarz</user>
   <email>slusarz@horde.org</email>
-  <active>yes</active>
+  <active>no</active>
  </developer>
- <date>2017-11-10</date>
+ <date>2017-11-11</date>
  <version>
   <release>2.0.6</release>
   <api>1.0.0</api>
@@ -122,6 +122,8 @@
     <name>lzf</name>
     <channel>pecl.php.net</channel>
     <min>1.5.2</min>
+    <max>2.0.0alpha1</max>
+    <exclude>2.0.0alpha1</exclude>
     <providesextension>lzf</providesextension>
    </package>
    <extension>
@@ -400,7 +402,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-11-10</date>
+   <date>2017-11-11</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * [jan] Improve JSON serialization of invalid UTF-8 data.
