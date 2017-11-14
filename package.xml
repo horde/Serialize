@@ -66,7 +66,6 @@
       <file name="AllTests.php" role="test" />
       <file name="bootstrap.php" role="test" />
       <file name="JsonTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/Serialize -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -153,8 +152,7 @@
    <install as="Horde/Serialize/fixtures/badutf8.txt" name="test/Horde/Serialize/fixtures/badutf8.txt" />
    <install as="Horde/Serialize/fixtures/badutf8_2.txt" name="test/Horde/Serialize/fixtures/badutf8_2.txt" />
    <install as="Horde/Serialize/JsonTest.php" name="test/Horde/Serialize/JsonTest.php" />
-   <install as="Horde/Serialize/phpunit.xml" name="test/Horde/Serialize/phpunit.xml" />
-  </filelist>
+   </filelist>
  </phprelease>
  <changelog>
   <release>
