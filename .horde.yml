@@ -2,7 +2,7 @@
 id: Serialize
 name: Serialize
 full: Data serialization library
-description: An interface to various methods of encapsulating data.
+description: A library for encapsulating complex data into simple strings.
 list: dev
 type: library
 homepage: https://www.horde.org/libraries/Horde_Serialize
