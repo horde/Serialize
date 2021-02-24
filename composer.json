@@ -31,19 +31,19 @@
     ],
     "require": {
         "horde/horde-installer-plugin": "*",
-        "php": "^5.3 || ^7",
-        "horde/exception": "^2",
-        "horde/util": "^2"
+        "php": "^7",
+        "horde/exception": "^3",
+        "horde/util": "^3"
     },
     "suggest": {
-        "horde/imap_client": "^2",
-        "horde/mime": "^2",
-        "horde/test": "^2.1",
-        "ext-lzf": "^1.5.2",
+        "horde/imap_client": "^3",
+        "horde/mime": "^3",
+        "horde/test": "^3",
         "ext-bz2": "*",
         "ext-json": "*",
         "ext-wddx": "*",
-        "ext-zlib": "*"
+        "ext-zlib": "*",
+        "ext-lzf": "*"
     },
     "autoload": {
         "psr-0": {
