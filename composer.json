@@ -1,18 +1,18 @@
 {
     "name": "horde/serialize",
     "description": "Data serialization library",
-    "type": "library",
+    "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Serialize",
     "license": "LGPL-2.1",
     "authors": [
         {
-            "name": "Chuck Hagenbuch",
-            "email": "chuck@horde.org",
+            "name": "Jan Schneider",
+            "email": "jan@horde.org",
             "role": "lead"
         },
         {
-            "name": "Jan Schneider",
-            "email": "jan@horde.org",
+            "name": "Chuck Hagenbuch",
+            "email": "chuck@horde.org",
             "role": "lead"
         },
         {
@@ -21,36 +21,36 @@
             "role": "developer"
         }
     ],
-    "version": "2.0.6",
-    "time": "2017-11-11",
+    "version": "3.0.0alpha1",
+    "time": "2021-02-24",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com/"
         }
     ],
     "require": {
+        "horde/horde-installer-plugin": "*",
         "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Exception": "^2",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "horde/exception": "^2",
+        "horde/util": "^2"
     },
     "suggest": {
-        "pear-pear.horde.org/Horde_Imap_Client": "^2",
-        "pear-pear.horde.org/Horde_Mime": "^2",
-        "pear-pear.horde.org/Horde_Test": "^2.1",
-        "pear-pecl.php.net/lzf": "^1.5.2",
+        "horde/imap_client": "^2",
+        "horde/mime": "^2",
+        "horde/test": "^2.1",
+        "ext-lzf": "^1.5.2",
         "ext-bz2": "*",
         "ext-json": "*",
         "ext-wddx": "*",
         "ext-zlib": "*"
     },
-    "replace": {
-        "pear-pear.horde.org/Horde_Serialize": "2.*",
-        "pear-horde/Horde_Serialize": "2.*"
-    },
     "autoload": {
         "psr-0": {
             "Horde_Serialize": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Serialize\\": "src/"
         }
     }
 }

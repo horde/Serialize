@@ -1,6 +1,6 @@
-----------
-v2.0.6-git
-----------
+------------
+v3.0.0alpha1
+------------
 
 [jan] Improve JSON serialization of invalid UTF-8 data.
 
