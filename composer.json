@@ -1,4 +1,5 @@
 {
+    "minimum-stability": "dev",
     "name": "horde/serialize",
     "description": "Data serialization library",
     "type": "library",
@@ -30,13 +31,13 @@
     ],
     "require": {
         "php": "^7",
-        "horde/exception": "^3",
-        "horde/util": "^3"
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
-        "horde/imap_client": "^3",
-        "horde/mime": "^3",
-        "horde/test": "^3",
+        "horde/imap_client": "^3 || dev-FRAMEWORK_6_0",
+        "horde/mime": "^3 || dev-FRAMEWORK_6_0",
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "ext-bz2": "*",
         "ext-json": "*",
         "ext-wddx": "*",
