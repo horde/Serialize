@@ -407,7 +407,7 @@ class JsonTest extends TestCase
 
         // numeric case: 1.0
         $this->assertEquals(
-            '1.0',
+            1.0,
             Horde_Serialize::serialize(Horde_Serialize::unserialize('1.0', Horde_Serialize::JSON), Horde_Serialize::JSON)
         );
 
