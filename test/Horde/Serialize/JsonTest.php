@@ -9,7 +9,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
+class Horde_Serialize_JsonTest extends Horde_Test_Case
 {
     // JSON associative arrays tests.
     public function testJsonAssociativeArray()
@@ -51,8 +51,7 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
             Horde_Serialize::serialize($arn, Horde_Serialize::JSON)
         );
 
-        $this->assertInternalType(
-            'array',
+        $this->assertIsArray(
             Horde_Serialize::unserialize($arn_ja, Horde_Serialize::JSON)
         );
 
@@ -76,8 +75,7 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
         $obj0_j = '{}';
         $obj1_j = '{ }';
 
-        $this->assertInternalType(
-            'object',
+        $this->assertIsObject(
             Horde_Serialize::unserialize($obj0_j, Horde_Serialize::JSON)
         );
         $this->assertEquals(
@@ -85,8 +83,7 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
             count(get_object_vars(Horde_Serialize::unserialize($obj0_j, Horde_Serialize::JSON)))
         );
 
-        $this->assertInternalType(
-            'object',
+        $this->assertIsObject(
             Horde_Serialize::unserialize($obj1_j, Horde_Serialize::JSON)
         );
         $this->assertEquals(
@@ -250,8 +247,7 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
             1.0,
             Horde_Serialize::unserialize('1.0', Horde_Serialize::JSON)
         );
-        $this->assertInternalType(
-            'float',
+        $this->assertIsFloat(
             Horde_Serialize::unserialize('1.0', Horde_Serialize::JSON)
         );
 
@@ -260,8 +256,7 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
             1.1,
             Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
-        $this->assertInternalType(
-            'float',
+        $this->assertIsFloat(
             Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
 
@@ -417,7 +412,7 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
 
         // numeric case: 1.0
         $this->assertEquals(
-            '1.0',
+            '1',
             Horde_Serialize::serialize(Horde_Serialize::unserialize('1.0', Horde_Serialize::JSON), Horde_Serialize::JSON)
         );
 
@@ -556,8 +551,7 @@ class Horde_Serialize_JsonTest extends PHPUnit_Framework_TestCase
         $obj1->car2->model = 'sports';
         $obj1_j = '{"car1":{"color":"tan","model":"sedan"},"car2":{"color":"red","model":"sports"}}';
 
-        $this->assertInternalType(
-            'object',
+        $this->assertIsObject(
             Horde_Serialize::unserialize($obj_j, Horde_Serialize::JSON)
         );
 
