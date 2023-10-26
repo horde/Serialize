@@ -32,7 +32,7 @@
         "horde/imap_client": "^2",
         "horde/mime": "^2",
         "horde/test": "^2.1",
-        "ext/lzf": "^1.5.2",
+        "ext-lzf": "^1.5.2",
         "ext-bz2": "*",
         "ext-json": "*",
         "ext-wddx": "*",
