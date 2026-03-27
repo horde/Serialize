@@ -56,6 +56,8 @@ quality:
 autoload:
   psr-0:
     Horde_Serialize: lib/
+  psr-4:
+    Horde\Serialize\: src/
 autoload-dev:
   psr-4:
     Horde\Serialize\Test\: test/

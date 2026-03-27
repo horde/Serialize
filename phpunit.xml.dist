@@ -16,11 +16,15 @@
         <testsuite name="unit">
             <directory>test/Unit</directory>
         </testsuite>
+        <testsuite name="integration">
+            <directory>test/Integration</directory>
+        </testsuite>
     </testsuites>
 
     <source ignoreIndirectDeprecations="true" restrictNotices="true" restrictWarnings="true">
         <include>
             <directory>lib</directory>
+            <directory>src</directory>
         </include>
     </source>
 </phpunit>
