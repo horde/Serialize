@@ -38,7 +38,6 @@
     "suggest": {
         "horde/imap_client": "^3 || dev-FRAMEWORK_6_0",
         "horde/mime": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "ext-bz2": "*",
         "ext-json": "*",
         "ext-wddx": "*",

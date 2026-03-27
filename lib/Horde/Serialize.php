@@ -328,7 +328,7 @@ class Horde_Serialize
                 break;
 
             case self::GZ_DEFLATE:
-                $data = gzinflate($data);
+                $data = @gzinflate($data);
                 break;
 
             case self::BASE64:
@@ -336,7 +336,11 @@ class Horde_Serialize
                 break;
 
             case self::GZ_COMPRESS:
-                $data = gzuncompress($data);
+                $data = @gzuncompress($data);
+                break;
+
+            case self::GZ_ENCODE:
+                $data = @gzdecode($data);
                 break;
 
                 // $params = Output character set
