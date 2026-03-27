@@ -1,7 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Json serialization tests.
+ * Copyright 2010-2026 The Horde Project (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
  * @author     Michael Slusarz <slusarz@horde.org>
  * @category   Horde
@@ -10,19 +15,18 @@
  * @subpackage UnitTests
  */
 
-namespace Horde\Serialize;
+namespace Horde\Serialize\Test\Unit;
 
-use PHPUnit\Framework\TestCase;
 use Horde_Serialize;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * @coversNothing
- */
+#[CoversClass(Horde_Serialize::class)]
 class JsonTest extends TestCase
 {
     // JSON associative arrays tests.
-    public function testJsonAssociativeArray()
+    public function testJsonAssociativeArray(): void
     {
         // array case - strict: associative array with nested associative
         // arrays
@@ -78,7 +82,7 @@ class JsonTest extends TestCase
     }
 
     // JSON empties tests.
-    public function testJsonEmpties()
+    public function testJsonEmpties(): void
     {
         $obj0_j = '{}';
         $obj1_j = '{ }';
@@ -97,25 +101,25 @@ class JsonTest extends TestCase
     }
 
     // JSON encode/decode tests (invalid UTF-8 input).
-    public function testJsonInvalidUTF8Input()
+    public function testJsonInvalidUTF8Input(): void
     {
-        $old_error_reporting = error_reporting(E_ALL & ~E_WARNING);
+        $old_error_reporting = error_reporting(E_ALL & ~E_WARNING & ~E_DEPRECATED);
         $this->assertEquals(
             '"Note: To play video messages sent to email, QuickTime\u00ae 6.5 or higher is required.\n"',
-            Horde_Serialize::serialize(file_get_contents(__DIR__ . '/fixtures/badutf8.txt'), Horde_Serialize::JSON, 'iso-8859-1')
+            Horde_Serialize::serialize(file_get_contents(__DIR__ . '/../Fixtures/badutf8.txt'), Horde_Serialize::JSON, 'iso-8859-1')
         );
         error_reporting($old_error_reporting);
         $this->assertEquals(
             '"This is b\u00e4d \u0080UTF-8.\n"',
             Horde_Serialize::serialize(
-                file_get_contents(__DIR__ . '/fixtures/badutf8_2.txt'),
+                file_get_contents(__DIR__ . '/../Fixtures/badutf8_2.txt'),
                 Horde_Serialize::JSON
             )
         );
     }
 
     // JSON encode/decode tests.
-    public function testJsonEncodeAndDecode()
+    public function testJsonEncodeAndDecode(): void
     {
         $obj = new stdClass();
         $obj->a_string = '"he":llo}:{world';
@@ -258,8 +262,7 @@ class JsonTest extends TestCase
             1.1,
             Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
-        $this->assertIsFloat(
-            Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
+        $this->assertIsFloat(Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
 
 
@@ -466,7 +469,7 @@ class JsonTest extends TestCase
     }
 
     // JSON nested arrays tests.
-    public function testJsonNestedArrays()
+    public function testJsonNestedArrays(): void
     {
         $str1 = '[{"this":"that"}]';
         $str1_ob = new stdClass();
@@ -540,7 +543,7 @@ class JsonTest extends TestCase
     }
 
     // JSON objects tests.
-    public function testJsonObjects()
+    public function testJsonObjects(): void
     {
         $obj_j = '{"a_string":"\"he\":llo}:{world","an_array":[1,2,3],"obj":{"a_number":123}}';
 
@@ -569,7 +572,7 @@ class JsonTest extends TestCase
     }
 
     // JSON spaces tests.
-    public function testJsonSpaces()
+    public function testJsonSpaces(): void
     {
         $obj = new stdClass();
         $obj->a_string = "\"he\":llo}:{world";
@@ -589,7 +592,7 @@ class JsonTest extends TestCase
     }
 
     // JSON unquoted keys tests.
-    public function testJsonUnquotedKeys()
+    public function testJsonUnquotedKeys(): void
     {
         $ob1 = new stdClass();
         $ob1->{'0'} = 'tan';
@@ -626,5 +629,4 @@ class JsonTest extends TestCase
             Horde_Serialize::serialize($arrs, Horde_Serialize::JSON)
         );
     }
-
 }
