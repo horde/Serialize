@@ -51,3 +51,7 @@ dependencies:
       wddx: '*'
       zlib: '*'
       lzf: '*'
+
+quality:
+  phpstan:
+    level: 9
