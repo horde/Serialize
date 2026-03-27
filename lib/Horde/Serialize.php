@@ -1,8 +1,9 @@
 <?php
+
 /**
  * The Serialize:: class provides various methods of encapsulating data.
  *
- * Copyright 2001-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2001-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -15,24 +16,24 @@
 class Horde_Serialize
 {
     /* Type constants */
-    const UNKNOWN = -1;
-    const NONE = 0;
-    const WDDX = 1;
-    const BZIP = 2;
-    const IMAP8 = 3;
-    const IMAPUTF7 = 4;
-    const IMAPUTF8 = 5;
-    const BASIC = 6;
-    const GZ_DEFLATE = 7;
-    const GZ_COMPRESS = 8;
-    const GZ_ENCODE = 9;
-    const BASE64 = 10;
-    const RAW = 12;
-    const URL = 13;
-    const UTF7 = 14;
-    const UTF7_BASIC = 15;
-    const JSON = 16;
-    const LZF = 17;
+    public const UNKNOWN = -1;
+    public const NONE = 0;
+    public const WDDX = 1;
+    public const BZIP = 2;
+    public const IMAP8 = 3;
+    public const IMAPUTF7 = 4;
+    public const IMAPUTF8 = 5;
+    public const BASIC = 6;
+    public const GZ_DEFLATE = 7;
+    public const GZ_COMPRESS = 8;
+    public const GZ_ENCODE = 9;
+    public const BASE64 = 10;
+    public const RAW = 12;
+    public const URL = 13;
+    public const UTF7 = 14;
+    public const UTF7_BASIC = 15;
+    public const JSON = 16;
+    public const LZF = 17;
 
     /**
      * Serialize a value.
@@ -50,11 +51,13 @@ class Horde_Serialize
      * @return string  The serialized data.
      * @throws Horde_Serialize_Exception
      */
-    public static function serialize($data, $mode = array(self::BASIC),
-                                     $params = null)
-    {
+    public static function serialize(
+        $data,
+        $mode = [self::BASIC],
+        $params = null
+    ) {
         if (!is_array($mode)) {
-            $mode = array($mode);
+            $mode = [$mode];
         }
 
         /* Parse through the list of serializing modes. */
@@ -85,11 +88,13 @@ class Horde_Serialize
      * @return string  The unserialized data.
      * @throws Horde_Serialize_Exception
      */
-    public static function unserialize($data, $mode = self::BASIC,
-                                       $params = null)
-    {
+    public static function unserialize(
+        $data,
+        $mode = self::BASIC,
+        $params = null
+    ) {
         if (!is_array($mode)) {
-            $mode = array($mode);
+            $mode = [$mode];
         }
 
         /* Parse through the list of unserializing modes. */
@@ -114,39 +119,39 @@ class Horde_Serialize
     public static function hasCapability($mode)
     {
         switch ($mode) {
-        case self::BZIP:
-            return Horde_Util::extensionExists('bz2');
+            case self::BZIP:
+                return Horde_Util::extensionExists('bz2');
 
-        case self::WDDX:
-            return Horde_Util::extensionExists('wddx');
+            case self::WDDX:
+                return Horde_Util::extensionExists('wddx');
 
-        case self::IMAPUTF7:
-            return class_exists('Horde_Imap_Client');
+            case self::IMAPUTF7:
+                return class_exists('Horde_Imap_Client');
 
-        case self::IMAPUTF8:
-            return class_exists('Horde_Mime');
+            case self::IMAPUTF8:
+                return class_exists('Horde_Mime');
 
-        case self::GZ_DEFLATE:
-        case self::GZ_COMPRESS:
-        case self::GZ_ENCODE:
-            return Horde_Util::extensionExists('zlib');
+            case self::GZ_DEFLATE:
+            case self::GZ_COMPRESS:
+            case self::GZ_ENCODE:
+                return Horde_Util::extensionExists('zlib');
 
-        case self::LZF:
-            return Horde_Util::extensionExists('lzf');
+            case self::LZF:
+                return Horde_Util::extensionExists('lzf');
 
-        case self::NONE:
-        case self::BASIC:
-        case self::BASE64:
-        case self::IMAP8:
-        case self::RAW:
-        case self::URL:
-        case self::UTF7:
-        case self::UTF7_BASIC:
-        case self::JSON:
-            return true;
+            case self::NONE:
+            case self::BASIC:
+            case self::BASE64:
+            case self::IMAP8:
+            case self::RAW:
+            case self::URL:
+            case self::UTF7:
+            case self::UTF7_BASIC:
+            case self::JSON:
+                return true;
 
-        default:
-            return false;
+            default:
+                return false;
         }
     }
 
@@ -167,95 +172,95 @@ class Horde_Serialize
     protected static function _serialize($data, $mode, $params = null)
     {
         switch ($mode) {
-        case self::NONE:
-            break;
+            case self::NONE:
+                break;
 
-        // $params['level'] = Level of compression (default: 3)
-        // $params['workfactor'] = How does compression phase behave when given
-        //                         worst case, highly repetitive, input data
-        //                         (default: 30)
-        case self::BZIP:
-            $data = bzcompress($data, isset($params['level']) ? $params['level'] : 3, isset($params['workfactor']) ? $params['workfactor'] : 30);
-            if (is_integer($data)) {
-                $data = false;
-            }
-            break;
-
-        case self::WDDX:
-            $data = wddx_serialize_value($data);
-            break;
-
-        case self::IMAP8:
-            $data = quoted_printable_encode($data);
-            break;
-
-        case self::IMAPUTF7:
-            $data = Horde_Imap_Client_Utf7imap::Utf8ToUtf7Imap(Horde_String::convertCharset($data, 'ISO-8859-1', 'UTF-8'));
-            break;
-
-        case self::IMAPUTF8:
-            $data = Horde_Mime::decode($data);
-            break;
-
-        // $params['level'] = Level of compression (default: 3)
-        case self::GZ_DEFLATE:
-            $data = gzdeflate($data, isset($params['level']) ? $params['level'] : 3);
-            break;
-
-        case self::BASIC:
-            $data = serialize($data);
-            break;
-
-        // $params['level'] = Level of compression (default: 3)
-        case self::GZ_COMPRESS:
-            $data = gzcompress($data, isset($params['level']) ? $params['level'] : 3);
-            break;
-
-        case self::BASE64:
-            $data = base64_encode($data);
-            break;
-
-        // $params['level'] = Level of compression (default: 3)
-        case self::GZ_ENCODE:
-            $data = gzencode($data, isset($params['level']) ? $params['level'] : 3);
-            break;
-
-        case self::RAW:
-            $data = rawurlencode($data);
-            break;
-
-        case self::URL:
-            $data = urlencode($data);
-            break;
-
-        // $params = Source character set
-        case self::UTF7:
-            $data = Horde_String::convertCharset($data, $params, 'UTF-7');
-            break;
-
-        // $params = Source character set
-        case self::UTF7_BASIC:
-            $data = self::serialize($data, array(self::UTF7, self::BASIC), $params);
-            break;
-
-        case self::JSON:
-            $tmp = json_encode($data);
-
-            /* Basic error handling attempts.
-             * TODO: JSON_ERROR_UTF8 = 5; available as of PHP 5.3.3 */
-            if (json_last_error() === 5) {
-                if (!$params) {
-                    $params = 'UTF-8';
+                // $params['level'] = Level of compression (default: 3)
+                // $params['workfactor'] = How does compression phase behave when given
+                //                         worst case, highly repetitive, input data
+                //                         (default: 30)
+            case self::BZIP:
+                $data = bzcompress($data, $params['level'] ?? 3, $params['workfactor'] ?? 30);
+                if (is_integer($data)) {
+                    $data = false;
                 }
-                $data = json_encode(Horde_String::convertCharset($data, $params, 'UTF-8', true));
-            } else {
-                $data = $tmp;
-            }
-            break;
+                break;
 
-        case self::LZF:
-            $data = lzf_compress($data);
-            break;
+            case self::WDDX:
+                $data = wddx_serialize_value($data);
+                break;
+
+            case self::IMAP8:
+                $data = quoted_printable_encode($data);
+                break;
+
+            case self::IMAPUTF7:
+                $data = Horde_Imap_Client_Utf7imap::Utf8ToUtf7Imap(Horde_String::convertCharset($data, 'ISO-8859-1', 'UTF-8'));
+                break;
+
+            case self::IMAPUTF8:
+                $data = Horde_Mime::decode($data);
+                break;
+
+                // $params['level'] = Level of compression (default: 3)
+            case self::GZ_DEFLATE:
+                $data = gzdeflate($data, $params['level'] ?? 3);
+                break;
+
+            case self::BASIC:
+                $data = serialize($data);
+                break;
+
+                // $params['level'] = Level of compression (default: 3)
+            case self::GZ_COMPRESS:
+                $data = gzcompress($data, $params['level'] ?? 3);
+                break;
+
+            case self::BASE64:
+                $data = base64_encode($data);
+                break;
+
+                // $params['level'] = Level of compression (default: 3)
+            case self::GZ_ENCODE:
+                $data = gzencode($data, $params['level'] ?? 3);
+                break;
+
+            case self::RAW:
+                $data = rawurlencode($data);
+                break;
+
+            case self::URL:
+                $data = urlencode($data);
+                break;
+
+                // $params = Source character set
+            case self::UTF7:
+                $data = Horde_String::convertCharset($data, $params, 'UTF-7');
+                break;
+
+                // $params = Source character set
+            case self::UTF7_BASIC:
+                $data = self::serialize($data, [self::UTF7, self::BASIC], $params);
+                break;
+
+            case self::JSON:
+                $tmp = json_encode($data);
+
+                /* Basic error handling attempts.
+                 * TODO: JSON_ERROR_UTF8 = 5; available as of PHP 5.3.3 */
+                if (json_last_error() === 5) {
+                    if (!$params) {
+                        $params = 'UTF-8';
+                    }
+                    $data = json_encode(Horde_String::convertCharset($data, $params, 'UTF-8', true));
+                } else {
+                    $data = $tmp;
+                }
+                break;
+
+            case self::LZF:
+                $data = lzf_compress($data);
+                break;
         }
 
         if ($data === false) {
@@ -280,80 +285,80 @@ class Horde_Serialize
     protected static function _unserialize(&$data, $mode, $params = null)
     {
         switch ($mode) {
-        case self::NONE:
-            break;
+            case self::NONE:
+                break;
 
-        case self::RAW:
-            $data = rawurldecode($data);
-            break;
+            case self::RAW:
+                $data = rawurldecode($data);
+                break;
 
-        case self::URL:
-            $data = urldecode($data);
-            break;
+            case self::URL:
+                $data = urldecode($data);
+                break;
 
-        case self::WDDX:
-            $data = wddx_deserialize($data);
-            break;
+            case self::WDDX:
+                $data = wddx_deserialize($data);
+                break;
 
-        case self::BZIP:
-            // $params['small'] = Use bzip2 'small memory' mode?
-            $data = bzdecompress($data, isset($params['small']) ? $params['small'] : false);
-            break;
+            case self::BZIP:
+                // $params['small'] = Use bzip2 'small memory' mode?
+                $data = bzdecompress($data, $params['small'] ?? false);
+                break;
 
-        case self::IMAP8:
-            $data = quoted_printable_decode($data);
-            break;
+            case self::IMAP8:
+                $data = quoted_printable_decode($data);
+                break;
 
-        case self::IMAPUTF7:
-            $data = Horde_String::convertCharset(Horde_Imap_Client_Utf7imap::Utf7ImapToUtf8($data), 'UTF-8', 'ISO-8859-1');
-            break;
+            case self::IMAPUTF7:
+                $data = Horde_String::convertCharset(Horde_Imap_Client_Utf7imap::Utf7ImapToUtf8($data), 'UTF-8', 'ISO-8859-1');
+                break;
 
-        case self::IMAPUTF8:
-            $data = Horde_Mime::encode($data);
-            break;
+            case self::IMAPUTF8:
+                $data = Horde_Mime::encode($data);
+                break;
 
-        case self::BASIC:
-            $data2 = @unserialize($data);
-            // Unserialize can return false both on error and if $data is the
-            // false value.
-            if (($data2 === false) && ($data == serialize(false))) {
-                return $data2;
-            }
-            $data = $data2;
-            break;
+            case self::BASIC:
+                $data2 = @unserialize($data);
+                // Unserialize can return false both on error and if $data is the
+                // false value.
+                if (($data2 === false) && ($data == serialize(false))) {
+                    return $data2;
+                }
+                $data = $data2;
+                break;
 
-        case self::GZ_DEFLATE:
-            $data = gzinflate($data);
-            break;
+            case self::GZ_DEFLATE:
+                $data = gzinflate($data);
+                break;
 
-        case self::BASE64:
-            $data = base64_decode($data);
-            break;
+            case self::BASE64:
+                $data = base64_decode($data);
+                break;
 
-        case self::GZ_COMPRESS:
-            $data = gzuncompress($data);
-            break;
+            case self::GZ_COMPRESS:
+                $data = gzuncompress($data);
+                break;
 
-        // $params = Output character set
-        case self::UTF7:
-            $data = Horde_String::convertCharset($data, 'utf-7', $params);
-            break;
+                // $params = Output character set
+            case self::UTF7:
+                $data = Horde_String::convertCharset($data, 'utf-7', $params);
+                break;
 
-        // $params = Output character set
-        case self::UTF7_BASIC:
-            $data = self::unserialize($data, array(self::BASIC, self::UTF7), $params);
-            break;
+                // $params = Output character set
+            case self::UTF7_BASIC:
+                $data = self::unserialize($data, [self::BASIC, self::UTF7], $params);
+                break;
 
-        case self::JSON:
-            $out = json_decode($data);
-            if (!is_null($out) || (strcasecmp($data, 'null') === 0)) {
-                return $out;
-            }
-            break;
+            case self::JSON:
+                $out = json_decode($data);
+                if (!is_null($out) || (strcasecmp($data, 'null') === 0)) {
+                    return $out;
+                }
+                break;
 
-        case self::LZF:
-            $data = @lzf_decompress($data);
-            break;
+            case self::LZF:
+                $data = @lzf_decompress($data);
+                break;
         }
 
         if ($data === false) {

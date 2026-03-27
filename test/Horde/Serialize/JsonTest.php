@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Json serialization tests.
  *
@@ -8,11 +9,16 @@
  * @package    Serialize
  * @subpackage UnitTests
  */
-namespace Horde\Serialize;
-use PHPUnit\Framework\TestCase;
-use \Horde_Serialize;
-use \stdClass;
 
+namespace Horde\Serialize;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Serialize;
+use stdClass;
+
+/**
+ * @coversNothing
+ */
 class JsonTest extends TestCase
 {
     // JSON associative arrays tests.
@@ -20,16 +26,16 @@ class JsonTest extends TestCase
     {
         // array case - strict: associative array with nested associative
         // arrays
-        $arr = array(
-            'car1'=> array(
-                'color'=> 'tan',
-                'model' => 'sedan'
-            ),
-            'car2' => array(
+        $arr = [
+            'car1' => [
+                'color' => 'tan',
+                'model' => 'sedan',
+            ],
+            'car2' => [
                 'color' => 'red',
-                'model' => 'sports'
-            )
-        );
+                'model' => 'sports',
+            ],
+        ];
 
         $this->assertEquals(
             '{"car1":{"color":"tan","model":"sedan"},"car2":{"color":"red","model":"sports"}}',
@@ -39,16 +45,16 @@ class JsonTest extends TestCase
         // array case - strict: associative array with nested associative
         // arrays, and some numeric keys thrown in
         // Should degrade to a numeric array.
-        $arn = array(
-            0 => array(
+        $arn = [
+            0 => [
                 0 => 'tan\\',
-                'model\\' => 'sedan'
-            ),
-            1 => array(
+                'model\\' => 'sedan',
+            ],
+            1 => [
                 0 => 'red',
-                'model' => 'sports'
-            )
-        );
+                'model' => 'sports',
+            ],
+        ];
         $arn_ja = '[{"0":"tan\\\\","model\\\\":"sedan"},{"0":"red","model":"sports"}]';
         $this->assertEquals(
             $arn_ja,
@@ -60,11 +66,11 @@ class JsonTest extends TestCase
         // sparse numeric assoc array: associative array numeric keys which
         // are not fully populated in a range of 0 to length-1
         // Test a sparsely populated numerically indexed associative array.
-        $arrs = array(
+        $arrs = [
             1 => 'one',
             2 => 'two',
-            5 => 'five'
-        );
+            5 => 'five',
+        ];
         $this->assertEquals(
             '{"1":"one","2":"two","5":"five"}',
             Horde_Serialize::serialize($arrs, Horde_Serialize::JSON)
@@ -113,12 +119,12 @@ class JsonTest extends TestCase
     {
         $obj = new stdClass();
         $obj->a_string = '"he":llo}:{world';
-        $obj->an_array = array(1, 2, 3);
+        $obj->an_array = [1, 2, 3];
         $obj->obj = new stdClass();
         $obj->obj->a_number = 123;
         $obj_j = '{"a_string":"\"he\":llo}:{world","an_array":[1,2,3],"obj":{"a_number":123}}';
 
-        $arr = array(null, true, array(1, 2, 3), "hello\"],[world!");
+        $arr = [null, true, [1, 2, 3], "hello\"],[world!"];
         $arr_j = '[null,true,[1,2,3],"hello\"],[world!"]';
 
         $str1 = 'hello world';
@@ -252,7 +258,8 @@ class JsonTest extends TestCase
             1.1,
             Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
-        $this->assertIsFloat(Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
+        $this->assertIsFloat(
+            Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
 
 
@@ -462,36 +469,36 @@ class JsonTest extends TestCase
     public function testJsonNestedArrays()
     {
         $str1 = '[{"this":"that"}]';
-        $str1_ob = new stdClass;
+        $str1_ob = new stdClass();
         $str1_ob->this = 'that';
 
         $str2 = '{"this":["that"]}';
-        $str2_ob = new stdClass;
-        $str2_ob->this = array('that');
+        $str2_ob = new stdClass();
+        $str2_ob->this = ['that'];
 
         $str3 = '{"params":[{"foo":["1"],"bar":"1"}]}';
-        $str3_ob = new stdClass;
-        $str3_ob2 = new stdClass;
-        $str3_ob2->foo = array(1);
+        $str3_ob = new stdClass();
+        $str3_ob2 = new stdClass();
+        $str3_ob2->foo = [1];
         $str3_ob2->bar = 1;
-        $str3_ob->params = array($str3_ob2);
+        $str3_ob->params = [$str3_ob2];
 
         $str4 = '[{"foo": "bar", "baz": "winkle"}]';
-        $str4_ob2 = new stdClass;
+        $str4_ob2 = new stdClass();
         $str4_ob2->foo = 'bar';
         $str4_ob2->baz = 'winkle';
-        $str4_ob = array($str4_ob2);
+        $str4_ob = [$str4_ob2];
 
         $str5 = '{"params":[{"options": {"old": [ ], "new": [{"elements": {"old": [], "new": [{"elementName": "aa", "isDefault": false, "elementRank": "0", "priceAdjust": "0", "partNumber": ""}]}}], "optionName": "aa", "isRequired": false, "optionDesc": ""}}]}';
 
-        $str5_ob = new stdClass;
-        $str5_ob->params = array(new stdClass);
-        $str5_ob->params[0]->options = new stdClass;
-        $str5_ob->params[0]->options->old = array();
-        $str5_ob->params[0]->options->new = array(new stdClass);
-        $str5_ob->params[0]->options->new[0]->elements = new stdClass;
-        $str5_ob->params[0]->options->new[0]->elements->old = array();
-        $str5_ob->params[0]->options->new[0]->elements->new = array(new stdClass);
+        $str5_ob = new stdClass();
+        $str5_ob->params = [new stdClass()];
+        $str5_ob->params[0]->options = new stdClass();
+        $str5_ob->params[0]->options->old = [];
+        $str5_ob->params[0]->options->new = [new stdClass()];
+        $str5_ob->params[0]->options->new[0]->elements = new stdClass();
+        $str5_ob->params[0]->options->new[0]->elements->old = [];
+        $str5_ob->params[0]->options->new[0]->elements->new = [new stdClass()];
         $str5_ob->params[0]->options->new[0]->elements->new[0]->elementName = 'aa';
         $str5_ob->params[0]->options->new[0]->elements->new[0]->isDefault = false;
         $str5_ob->params[0]->options->new[0]->elements->new[0]->elementRank = 0;
@@ -503,7 +510,7 @@ class JsonTest extends TestCase
 
         // simple compactly-nested array
         $this->assertEquals(
-            array($str1_ob),
+            [$str1_ob],
             Horde_Serialize::unserialize($str1, Horde_Serialize::JSON)
         );
 
@@ -537,11 +544,11 @@ class JsonTest extends TestCase
     {
         $obj_j = '{"a_string":"\"he\":llo}:{world","an_array":[1,2,3],"obj":{"a_number":123}}';
 
-        $obj1 = new stdClass;
-        $obj1->car1 = new stdClass;
+        $obj1 = new stdClass();
+        $obj1->car1 = new stdClass();
         $obj1->car1->color = 'tan';
         $obj1->car1->model = 'sedan';
-        $obj1->car2 = new stdClass;
+        $obj1->car2 = new stdClass();
         $obj1->car2->color = 'red';
         $obj1->car2->model = 'sports';
         $obj1_j = '{"car1":{"color":"tan","model":"sedan"},"car2":{"color":"red","model":"sports"}}';
@@ -564,10 +571,10 @@ class JsonTest extends TestCase
     // JSON spaces tests.
     public function testJsonSpaces()
     {
-        $obj = new stdClass;
+        $obj = new stdClass();
         $obj->a_string = "\"he\":llo}:{world";
-        $obj->an_array = array(1, 2, 3);
-        $obj->obj = new stdClass;
+        $obj->an_array = [1, 2, 3];
+        $obj->obj = new stdClass();
         $obj->obj->a_number = 123;
 
         $obj_js = '{"a_string": "\"he\":llo}:{world",
@@ -584,18 +591,18 @@ class JsonTest extends TestCase
     // JSON unquoted keys tests.
     public function testJsonUnquotedKeys()
     {
-        $ob1 = new stdClass;
+        $ob1 = new stdClass();
         $ob1->{'0'} = 'tan';
         $ob1->model = 'sedan';
 
-        $ob2 = new stdClass;
+        $ob2 = new stdClass();
         $ob2->{'0'} = 'red';
         $ob2->model = 'sports';
 
-        $arn = array($ob1, $ob2);
+        $arn = [$ob1, $ob2];
         $arn_ja = '[{"0":"tan","model":"sedan"},{"0":"red","model":"sports"}]';
 
-        $arrs = new stdClass;
+        $arrs = new stdClass();
         $arrs->{'1'} = 'one';
         $arrs->{'2'} = 'two';
         $arrs->{'5'} = 'fi"ve';
