@@ -262,7 +262,8 @@ class JsonTest extends TestCase
             1.1,
             Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
-        $this->assertIsFloat(Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
+        $this->assertIsFloat(
+            Horde_Serialize::unserialize('1.1', Horde_Serialize::JSON)
         );
 
 

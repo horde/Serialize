@@ -21,6 +21,7 @@ use Horde_Serialize;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Horde_Serialize_Exception;
 
 #[CoversClass(Horde_Serialize::class)]
 class BasicTest extends TestCase
@@ -287,7 +288,7 @@ class BasicTest extends TestCase
     public function testBasicUnserializeInvalidData(): void
     {
         // Invalid serialized data should throw exception
-        $this->expectException(\Horde_Serialize_Exception::class);
+        $this->expectException(Horde_Serialize_Exception::class);
         Horde_Serialize::unserialize('invalid serialized data', Horde_Serialize::BASIC);
     }
 }
