@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace Horde\Serialize;
 
+use Horde\Util\HordeString;
+
 /**
  * JSON serialization implementation.
  *
@@ -35,7 +37,7 @@ class JsonSerializer implements SerializerInterface
         // Handle UTF-8 encoding errors
         if (json_last_error() === JSON_ERROR_UTF8) {
             $charset = $this->sourceCharset ?? 'UTF-8';
-            $data = json_encode(\Horde_String::convertCharset($data, $charset, 'UTF-8', true));
+            $data = json_encode(HordeString::convertCharset($data, $charset, 'UTF-8', true));
             if ($data === false) {
                 throw new Exception('JSON serialization failed: ' . json_last_error_msg());
             }

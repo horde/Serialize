@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace Horde\Serialize;
 
+use Horde_Serialize;
+
 /**
  * Factory for creating serializer instances.
  *
@@ -238,25 +240,25 @@ class SerializerFactory
     public function createByMode(int $mode, mixed $params = null): SerializerInterface
     {
         return match ($mode) {
-            \Horde_Serialize::NONE => $this->createNone(),
-            \Horde_Serialize::BASIC => $this->createBasic(),
-            \Horde_Serialize::JSON => $this->createJson($params),
-            \Horde_Serialize::BASE64 => $this->createBase64(),
-            \Horde_Serialize::URL => $this->createUrl(false),
-            \Horde_Serialize::RAW => $this->createUrl(true),
-            \Horde_Serialize::BZIP => $this->createBzip(
+            Horde_Serialize::NONE => $this->createNone(),
+            Horde_Serialize::BASIC => $this->createBasic(),
+            Horde_Serialize::JSON => $this->createJson($params),
+            Horde_Serialize::BASE64 => $this->createBase64(),
+            Horde_Serialize::URL => $this->createUrl(false),
+            Horde_Serialize::RAW => $this->createUrl(true),
+            Horde_Serialize::BZIP => $this->createBzip(
                 $params['level'] ?? 3,
                 $params['workfactor'] ?? 30
             ),
-            \Horde_Serialize::GZ_DEFLATE => $this->createGzDeflate($params['level'] ?? 3),
-            \Horde_Serialize::GZ_COMPRESS => $this->createGzCompress($params['level'] ?? 3),
-            \Horde_Serialize::GZ_ENCODE => $this->createGzEncode($params['level'] ?? 3),
-            \Horde_Serialize::LZF => $this->createLzf(),
-            \Horde_Serialize::IMAP8 => $this->createImap8(),
-            \Horde_Serialize::IMAPUTF7 => $this->createImapUtf7(),
-            \Horde_Serialize::IMAPUTF8 => $this->createImapUtf8(),
-            \Horde_Serialize::UTF7 => $this->createUtf7($params ?? 'UTF-8'),
-            \Horde_Serialize::UTF7_BASIC => $this->createUtf7($params ?? 'UTF-8', $params ?? 'UTF-8', true),
+            Horde_Serialize::GZ_DEFLATE => $this->createGzDeflate($params['level'] ?? 3),
+            Horde_Serialize::GZ_COMPRESS => $this->createGzCompress($params['level'] ?? 3),
+            Horde_Serialize::GZ_ENCODE => $this->createGzEncode($params['level'] ?? 3),
+            Horde_Serialize::LZF => $this->createLzf(),
+            Horde_Serialize::IMAP8 => $this->createImap8(),
+            Horde_Serialize::IMAPUTF7 => $this->createImapUtf7(),
+            Horde_Serialize::IMAPUTF8 => $this->createImapUtf8(),
+            Horde_Serialize::UTF7 => $this->createUtf7($params ?? 'UTF-8'),
+            Horde_Serialize::UTF7_BASIC => $this->createUtf7($params ?? 'UTF-8', $params ?? 'UTF-8', true),
             default => throw new Exception("Unsupported serialization mode: {$mode}"),
         };
     }

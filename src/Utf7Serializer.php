@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace Horde\Serialize;
 
+use Horde\Util\HordeString;
+
 /**
  * UTF-7 charset conversion serialization.
  *
@@ -40,12 +42,12 @@ class Utf7Serializer implements SerializerInterface
             throw new Exception('UTF-7 serializer requires string input');
         }
 
-        return \Horde_String::convertCharset($data, $this->sourceCharset, 'UTF-7');
+        return HordeString::convertCharset($data, $this->sourceCharset, 'UTF-7');
     }
 
     public function unserialize(string $data): mixed
     {
-        $result = \Horde_String::convertCharset($data, 'UTF-7', $this->targetCharset);
+        $result = HordeString::convertCharset($data, 'UTF-7', $this->targetCharset);
 
         if ($this->withBasic) {
             $unserialized = @unserialize($result);
@@ -60,6 +62,6 @@ class Utf7Serializer implements SerializerInterface
 
     public function isSupported(): bool
     {
-        return class_exists('Horde_String');
+        return class_exists(HordeString::class);
     }
 }
