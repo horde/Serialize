@@ -29,8 +29,7 @@ class Utf7Serializer implements SerializerInterface
         private readonly string $sourceCharset = 'UTF-8',
         private readonly string $targetCharset = 'UTF-8',
         private readonly bool $withBasic = false,
-    ) {
-    }
+    ) {}
 
     public function serialize(mixed $data): string
     {

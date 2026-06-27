@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * The Serialize:: class provides various methods of encapsulating data.
  *
@@ -120,10 +122,10 @@ class Horde_Serialize
     {
         switch ($mode) {
             case self::BZIP:
-                return Horde_Util::extensionExists('bz2');
+                return Util::extensionExists('bz2');
 
             case self::WDDX:
-                return Horde_Util::extensionExists('wddx');
+                return Util::extensionExists('wddx');
 
             case self::IMAPUTF7:
                 return class_exists('Horde_Imap_Client');
@@ -134,10 +136,10 @@ class Horde_Serialize
             case self::GZ_DEFLATE:
             case self::GZ_COMPRESS:
             case self::GZ_ENCODE:
-                return Horde_Util::extensionExists('zlib');
+                return Util::extensionExists('zlib');
 
             case self::LZF:
-                return Horde_Util::extensionExists('lzf');
+                return Util::extensionExists('lzf');
 
             case self::NONE:
             case self::BASIC:

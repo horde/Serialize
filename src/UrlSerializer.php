@@ -25,8 +25,7 @@ class UrlSerializer implements SerializerInterface
 {
     public function __construct(
         private readonly bool $raw = false,
-    ) {
-    }
+    ) {}
 
     public function serialize(mixed $data): string
     {

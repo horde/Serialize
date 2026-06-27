@@ -25,6 +25,9 @@ use Horde\Serialize\UrlSerializer;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+/**
+ * @coversNothing
+ */
 class SerializerTest extends TestCase
 {
     // JsonSerializer tests

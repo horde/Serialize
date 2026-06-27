@@ -16,6 +16,8 @@ declare(strict_types=1);
 namespace Horde\Serialize;
 
 use Horde\Util\HordeString;
+use Horde_Imap_Client_Utf7imap;
+use Horde_Mime;
 
 /**
  * IMAP-related serialization implementations.
@@ -48,10 +50,10 @@ class ImapSerializer implements SerializerInterface
 
         return match ($this->mode) {
             self::MODE_IMAP8 => quoted_printable_encode($data),
-            self::MODE_IMAPUTF7 => \Horde_Imap_Client_Utf7imap::Utf8ToUtf7Imap(
+            self::MODE_IMAPUTF7 => Horde_Imap_Client_Utf7imap::Utf8ToUtf7Imap(
                 HordeString::convertCharset($data, 'ISO-8859-1', 'UTF-8')
             ),
-            self::MODE_IMAPUTF8 => \Horde_Mime::decode($data),
+            self::MODE_IMAPUTF8 => Horde_Mime::decode($data),
             default => throw new Exception("Unknown IMAP mode: {$this->mode}"),
         };
     }
@@ -61,11 +63,11 @@ class ImapSerializer implements SerializerInterface
         return match ($this->mode) {
             self::MODE_IMAP8 => quoted_printable_decode($data),
             self::MODE_IMAPUTF7 => HordeString::convertCharset(
-                \Horde_Imap_Client_Utf7imap::Utf7ImapToUtf8($data),
+                Horde_Imap_Client_Utf7imap::Utf7ImapToUtf8($data),
                 'UTF-8',
                 'ISO-8859-1'
             ),
-            self::MODE_IMAPUTF8 => \Horde_Mime::encode($data),
+            self::MODE_IMAPUTF8 => Horde_Mime::encode($data),
             default => throw new Exception("Unknown IMAP mode: {$this->mode}"),
         };
     }

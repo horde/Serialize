@@ -23,6 +23,4 @@ use Horde_Serialize_Exception;
  * @package  Serialize
  * @category Horde
  */
-class Exception extends Horde_Serialize_Exception
-{
-}
+class Exception extends Horde_Serialize_Exception {}

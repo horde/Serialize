@@ -22,7 +22,11 @@ use Horde\Serialize\JsonSerializer;
 use Horde\Serialize\SerializerFactory;
 use Horde\Serialize\UrlSerializer;
 use PHPUnit\Framework\TestCase;
+use Exception;
 
+/**
+ * @coversNothing
+ */
 class SerializerFactoryTest extends TestCase
 {
     private SerializerFactory $factory;
@@ -86,7 +90,7 @@ class SerializerFactoryTest extends TestCase
             try {
                 $serializer = $this->factory->$method();
                 $this->assertInstanceOf(CompressionSerializer::class, $serializer);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // Skip if extension not available
                 $this->assertStringContainsString('not supported', $e->getMessage());
             }

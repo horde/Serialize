@@ -27,8 +27,7 @@ class JsonSerializer implements SerializerInterface
 {
     public function __construct(
         private readonly ?string $sourceCharset = null,
-    ) {
-    }
+    ) {}
 
     public function serialize(mixed $data): string
     {
