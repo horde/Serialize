@@ -246,7 +246,8 @@ class Horde_Serialize
                 break;
 
             case self::JSON:
-                $tmp = json_encode($data);
+                /* Replace invalid UTF-8 sequences with U+FFFD */
+                $tmp = json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE);
 
                 /* Basic error handling attempts.
                  * TODO: JSON_ERROR_UTF8 = 5; available as of PHP 5.3.3 */
