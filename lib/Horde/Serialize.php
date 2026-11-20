@@ -248,13 +248,17 @@ class Horde_Serialize
             case self::JSON:
                 $tmp = json_encode($data);
 
-                /* Basic error handling attempts.
-                 * TODO: JSON_ERROR_UTF8 = 5; available as of PHP 5.3.3 */
-                if (json_last_error() === 5) {
+                /* Convert from the source charset, then replace any bytes
+                 * that are still invalid. Converting UTF-8 to UTF-8 is a
+                 * no-op, so the conversion alone cannot fix bad UTF-8. */
+                if (json_last_error() === JSON_ERROR_UTF8) {
                     if (!$params) {
                         $params = 'UTF-8';
                     }
-                    $data = json_encode(Horde_String::convertCharset($data, $params, 'UTF-8', true));
+                    $data = json_encode(
+                        Horde_String::convertCharset($data, $params, 'UTF-8', true),
+                        JSON_INVALID_UTF8_SUBSTITUTE
+                    );
                 } else {
                     $data = $tmp;
                 }

@@ -67,6 +67,18 @@ class SerializerTest extends TestCase
         $this->assertNull($serializer->unserialize('null'));
     }
 
+    public function testJsonSerializerInvalidUtf8(): void
+    {
+        $serializer = new JsonSerializer();
+        $this->assertSame('"Gr\u00fc\ufffd"', $serializer->serialize("Gr\xC3\xBC\xDF"));
+    }
+
+    public function testJsonSerializerSourceCharset(): void
+    {
+        $serializer = new JsonSerializer('ISO-8859-1');
+        $this->assertSame('"Gr\u00fc\u00dfe"', $serializer->serialize("Gr\xFC\xDFe"));
+    }
+
     // BasicSerializer tests
     public function testBasicSerializerArrays(): void
     {

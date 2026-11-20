@@ -118,6 +118,23 @@ class JsonTest extends TestCase
         );
     }
 
+    // Invalid bytes in UTF-8 input are replaced, valid characters are kept.
+    public function testJsonInvalidUTF8InUtf8Input(): void
+    {
+        $this->assertEquals(
+            '"Gr\u00fc\ufffd \ufffd"',
+            Horde_Serialize::serialize("Gr\xC3\xBC\xDF \xFC", Horde_Serialize::JSON)
+        );
+        $this->assertEquals(
+            '{"body":"\ufffd","identity":null}',
+            Horde_Serialize::serialize(
+                (object)['body' => "\xFC", 'identity' => null],
+                Horde_Serialize::JSON,
+                'UTF-8'
+            )
+        );
+    }
+
     // JSON encode/decode tests.
     public function testJsonEncodeAndDecode(): void
     {
