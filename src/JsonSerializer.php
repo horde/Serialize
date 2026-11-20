@@ -33,10 +33,14 @@ class JsonSerializer implements SerializerInterface
     {
         $tmp = json_encode($data);
 
-        // Handle UTF-8 encoding errors
+        // Handle UTF-8 encoding errors: convert from the source charset, then
+        // replace any bytes that are still invalid (UTF-8 to UTF-8 is a no-op)
         if (json_last_error() === JSON_ERROR_UTF8) {
             $charset = $this->sourceCharset ?? 'UTF-8';
-            $data = json_encode(HordeString::convertCharset($data, $charset, 'UTF-8', true));
+            $data = json_encode(
+                HordeString::convertCharset($data, $charset, 'UTF-8', true),
+                JSON_INVALID_UTF8_SUBSTITUTE
+            );
             if ($data === false) {
                 throw new Exception('JSON serialization failed: ' . json_last_error_msg());
             }
